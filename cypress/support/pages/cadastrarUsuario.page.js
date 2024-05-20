@@ -10,12 +10,41 @@ export default class CadastroPage {
   labelErroEmail = ":nth-child(2) > .input-error";
   labelErroSenha = ":nth-child(3) > .input-error";
   labelErroConfSenha = ":nth-child(4) > .input-error";
+  labelErroConfSenhaDif = ".input-error";
 
   labelSucesso = ".modal-body > h3";
-  labelCadastroSucesso = ".error-message";
+  labelCadastroRealizado = ".error-message";
 
   labelFalhaNoCadastro = ".modal-body > h3";
   labelNaoCadastrou = ".error-message";
+
+  inputEmailLogin = '[name="email"]';
+  inputSenhaLogin = '[name="password"]';
+  buttonLogin = ".login-button";
+  buttonPerfil = '[href="/profile"]';
+  buttonGerenciarConta = '[href="/account"]';
+  tipoUsuario = ":nth-child(3) > label";
+  inputTipoUsuário = ":nth-child(3) > .profile-input";
+
+  typeEmailLogin(email) {
+    cy.get(this.inputEmailLogin).type(email);
+  }
+
+  typeSenhaLogin(senha) {
+    cy.get(this.inputSenhaLogin).type(senha);
+  }
+
+  clickButtonLogar() {
+    cy.get(this.buttonLogin).click();
+  }
+
+  clickButtonPerfil() {
+    cy.get(this.buttonPerfil).click();
+  }
+
+  clickButtonGerenciar() {
+    cy.get(this.buttonGerenciarConta).click();
+  }
 
   typeNome(nome) {
     cy.get(this.inputNome).type(nome);
