@@ -73,11 +73,11 @@ When("acessar a conta de um novo usuário", function () {
 });
 
 When("acessar o perfil do usuário", function () {
-  paginaCadastro.clickButtonPerfil();
+  paginaCadastro.clickLinkPerfil();
 });
 
 When("acessar a funcionalidade de gerenciar conta", function () {
-  paginaCadastro.clickButtonGerenciar();
+  paginaCadastro.clickLinkGerenciar();
 });
 
 When(

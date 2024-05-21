@@ -7,8 +7,6 @@ export default class LoginPage {
   labelUsuarioInválido = ".error-message";
 
   buttonLogin = ".login-button";
-  buttonPerfil = '[href="/profile"]';
-  buttonGerenciarConta = '[href="/account"]';
   buttonOk = ".modal-actions > button";
 
   tipoUsuario = ":nth-child(3) > label";

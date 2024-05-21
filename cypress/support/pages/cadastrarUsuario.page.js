@@ -20,11 +20,14 @@ export default class CadastroPage {
 
   inputEmailLogin = '[name="email"]';
   inputSenhaLogin = '[name="password"]';
+
   buttonLogin = ".login-button";
-  buttonPerfil = '[href="/profile"]';
-  buttonGerenciarConta = '[href="/account"]';
+
   tipoUsuario = ":nth-child(3) > label";
   inputTipoUsuário = ":nth-child(3) > .profile-input";
+
+  linkPerfil = '[href="/profile"]';
+  linkGerenciarConta = '[href="/account"]';
 
   typeEmailLogin(email) {
     cy.get(this.inputEmailLogin).type(email);
@@ -38,12 +41,12 @@ export default class CadastroPage {
     cy.get(this.buttonLogin).click();
   }
 
-  clickButtonPerfil() {
-    cy.get(this.buttonPerfil).click();
+  clickLinkPerfil() {
+    cy.get(this.linkPerfil).click();
   }
 
-  clickButtonGerenciar() {
-    cy.get(this.buttonGerenciarConta).click();
+  clickLinkGerenciar() {
+    cy.get(this.linkGerenciarConta).click();
   }
 
   typeNome(nome) {
