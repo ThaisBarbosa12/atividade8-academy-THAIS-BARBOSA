@@ -8,7 +8,7 @@ Para conseguir avaliar filmes
 Contexto: Deve acessar a funcionalidade de cadastro
 Dado que acessei a tela de cadastro de usuário
 
-@run
+@run @newUser
 Cenário: Deve ser possível cadastrar um usuário informando dados válidos nos campos obrigatórios
 Quando preencher o campo nome
 E preencher o campo e-mail
@@ -56,7 +56,7 @@ Exemplos:
 |     @    |
 |   .com   |
 
-@run
+@run @newUser
 Esquema do Cenário: Deve ser possível criar um usuario com qualquer formato de nome
 Quando preencher o campo nome "<nome>" com qualquer formato
 E preencher o campo e-mail

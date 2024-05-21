@@ -1,6 +1,7 @@
 import { faker } from "@faker-js/faker";
 var namecommands = faker.person.firstName() + " qararo";
 var emailcommands = faker.internet.email();
+
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite
@@ -27,14 +28,14 @@ var emailcommands = faker.internet.email();
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-// Cypress.Commands.add("novoUsuário", function () {
-//   return cy.request({
-//     method: "POST",
-//     url: "https://raromdb-3c39614e42d4.herokuapp.com/api/users",
-//     body: {
-//       name: namecommands,
-//       email: emailcommands,
-//       password: "123456",
-//     },
-//   });
-// });
+Cypress.Commands.add("newUser", function () {
+  return cy.request({
+    method: "POST",
+    url: "https://raromdb-3c39614e42d4.herokuapp.com/api/users",
+    body: {
+      name: namecommands,
+      email: emailcommands,
+      password: "123456",
+    },
+  });
+});

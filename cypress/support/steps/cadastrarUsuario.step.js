@@ -8,6 +8,8 @@ import {
 import { faker } from "@faker-js/faker";
 import CadastroPage from "../pages/cadastrarUsuario.page";
 const paginaCadastro = new CadastroPage();
+var id;
+var email;
 
 Before({ tags: "@usuarioExistente" }, () => {
   cy.intercept("POST", "https://raromdb-3c39614e42d4.herokuapp.com/api/users", {
