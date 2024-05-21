@@ -195,13 +195,6 @@ When("habilitar a função alterar senha", function () {
   paginaGerenciar.clickButtonAlterarSenha();
 });
 
-// When('', function () {})
-// When('', function () {})
-// When('', function () {})
-// When('', function () {})
-// When('', function () {})
-// When('', function () {})
-
 Then(
   "será possível atualizar as informações do usuário com sucesso",
   function () {
@@ -237,11 +230,3 @@ Then(
     cy.get(paginaGerenciar.labelCampoConfirmaSenha).should("contain", mensagem);
   }
 );
-
-// Then('', function () {})
-// Then('', function () {})
-// Then('', function () {})
-// Then('', function () {})
-// Then('', function () {})
-// Then('', function () {})
-// Then('', function () {})

@@ -203,6 +203,6 @@ Cenário: Não deve ser possível atualizar a senha do usuário com dados nulos 
 Dado que possuo um usuário administrador cadastrado e logado no sistema
 E que acessei a funcionalidade de gerencimaneto de conta
 Quando habilitar a função alterar senha
-acessar a função salvar
+E acessar a função salvar
 Então o campo senha senha exibirá a mensagem de erro "Campo obrigatório"
 E o campo confirmar senha exibirá a mensagem de erro "As senhas devem ser iguais."
