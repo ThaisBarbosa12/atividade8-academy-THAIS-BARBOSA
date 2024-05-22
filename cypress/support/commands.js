@@ -1,7 +1,9 @@
 import { faker } from "@faker-js/faker";
 var namecommands = faker.person.firstName() + " qararo";
 var emailcommands = faker.internet.email();
-
+var id;
+var email;
+var token;
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite
@@ -29,13 +31,49 @@ var emailcommands = faker.internet.email();
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 Cypress.Commands.add("newUser", function () {
-  return cy.request({
+  return cy
+    .request({
+      method: "POST",
+      url: "https://raromdb-3c39614e42d4.herokuapp.com/api/users",
+      body: {
+        name: namecommands,
+        email: emailcommands,
+        password: "123456",
+      },
+    })
+    .as("usuarioCriado")
+    .then((response) => {
+      id = response.body.id;
+      email = response.body.email;
+    });
+});
+Cypress.Commands.add("deleteUser", function () {
+  cy.request({
     method: "POST",
-    url: "https://raromdb-3c39614e42d4.herokuapp.com/api/users",
+    url: "https://raromdb-3c39614e42d4.herokuapp.com/api/auth/login",
     body: {
-      name: namecommands,
-      email: emailcommands,
+      email: email,
       password: "123456",
     },
-  });
+  })
+    .as("logarUsuario")
+    .then((response) => {
+      token = response.body.accessToken;
+      cy.request({
+        method: "PATCH",
+        url: "https://raromdb-3c39614e42d4.herokuapp.com/api/users/admin",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }).as("promoverAdmin");
+    })
+    .then((response) => {
+      cy.request({
+        method: "DELETE",
+        url: "https://raromdb-3c39614e42d4.herokuapp.com/api/users/" + id,
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }).as("deletarUsuario");
+    });
 });

@@ -9,24 +9,12 @@ import { faker } from "@faker-js/faker";
 import GerenciarPage from "../pages/gerenciarConta.page";
 const paginaGerenciar = new GerenciarPage();
 var token;
-var id;
 var email;
 
 Before({ tags: "@novoUsuario" }, () => {
-  var nameUser = faker.person.firstName() + " teste";
-  var emailUser = faker.internet.email();
-  cy.request({
-    method: "POST",
-    url: "https://raromdb-3c39614e42d4.herokuapp.com/api/users",
-    body: {
-      name: nameUser,
-      email: emailUser,
-      password: "123456",
-    },
-  })
+  cy.newUser()
     .as("usuarioCriado")
     .then((response) => {
-      id = response.body.id;
       email = response.body.email;
     });
 });
@@ -41,34 +29,7 @@ Before(function () {
 });
 
 After({ tags: "@novoUsuario" }, () => {
-  cy.request({
-    method: "POST",
-    url: "https://raromdb-3c39614e42d4.herokuapp.com/api/auth/login",
-    body: {
-      email: email,
-      password: "123456",
-    },
-  })
-    .as("logarUsuario")
-    .then((response) => {
-      token = response.body.accessToken;
-      cy.request({
-        method: "PATCH",
-        url: "https://raromdb-3c39614e42d4.herokuapp.com/api/users/admin",
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      }).as("promoverAdmin");
-    })
-    .then((response) => {
-      cy.request({
-        method: "DELETE",
-        url: "https://raromdb-3c39614e42d4.herokuapp.com/api/users/" + id,
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      }).as("deletarUsuario");
-    });
+  cy.deleteUser();
 });
 
 Given(
