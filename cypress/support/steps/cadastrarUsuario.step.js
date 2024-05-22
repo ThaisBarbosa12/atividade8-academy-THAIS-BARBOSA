@@ -3,7 +3,7 @@ import {
   When,
   Then,
   Before,
-  BeforeAll,
+  After,
 } from "@badeball/cypress-cucumber-preprocessor";
 import { faker } from "@faker-js/faker";
 import CadastroPage from "../pages/cadastrarUsuario.page";
@@ -12,27 +12,15 @@ var id;
 var email;
 
 Before({ tags: "@usuarioExistente" }, () => {
-  cy.intercept("POST", "https://raromdb-3c39614e42d4.herokuapp.com/api/users", {
-    statusCode: 409,
-    body: {
-      message: "Email already in use",
-      error: "Conflict",
-    },
-  }).as("postUser");
+  cy.userExixst().as("postUser");
 });
 
 Before({ tags: "@novoUsuario" }, () => {
-  var nameUser = faker.person.firstName() + " teste";
-  var emailUser = faker.internet.email();
-  cy.request({
-    method: "POST",
-    url: "https://raromdb-3c39614e42d4.herokuapp.com/api/users",
-    body: {
-      name: nameUser,
-      email: emailUser,
-      password: "123456",
-    },
-  }).as("usuarioCriado");
+  cy.newUser().as("usuarioCriado");
+});
+
+After({ tags: "@novoUsuario" }, () => {
+  cy.deleteUser();
 });
 
 Given("que acessei a tela de cadastro de usuário", function () {

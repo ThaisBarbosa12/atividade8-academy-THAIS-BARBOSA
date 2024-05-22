@@ -31,13 +31,15 @@ var token;
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 Cypress.Commands.add("newUser", function () {
+  var newName = faker.person.firstName() + " teste";
+  var newEmail = faker.internet.email();
   return cy
     .request({
       method: "POST",
       url: "https://raromdb-3c39614e42d4.herokuapp.com/api/users",
       body: {
-        name: namecommands,
-        email: emailcommands,
+        name: newName,
+        email: newEmail,
         password: "123456",
       },
     })
@@ -76,4 +78,14 @@ Cypress.Commands.add("deleteUser", function () {
         },
       }).as("deletarUsuario");
     });
+});
+
+Cypress.Commands.add("userExixst", function () {
+  cy.intercept("POST", "https://raromdb-3c39614e42d4.herokuapp.com/api/users", {
+    statusCode: 409,
+    body: {
+      message: "Email already in use",
+      error: "Conflict",
+    },
+  });
 });

@@ -13,7 +13,7 @@ module.exports = defineConfig({
     specPattern: "cypress/e2e/**/*.feature",
     env: {
       TAGS: "not @ignore",
-      TAGS: "@usuarioExistente or @run or @novoUsuario",
+      TAGS: "@usuarioExistente or @run or @novoUsuario or @newUserFront",
     },
 
     async setupNodeEvents(on, config) {
